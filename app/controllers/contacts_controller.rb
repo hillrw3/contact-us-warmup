@@ -5,6 +5,7 @@ class ContactsController < ApplicationController
   end
 
   def show
+    set_contact
   end
 
   def mew
@@ -12,6 +13,7 @@ class ContactsController < ApplicationController
   end
 
   def edit
+    set_contact
   end
 
   def create
@@ -24,7 +26,8 @@ class ContactsController < ApplicationController
     end
   end
 
-  def destroy
+  def update
+   set_contact
     if @contact.update(contact_params)
       redirect_to @contact, notice: 'Contact was successfully updated.'
     else
@@ -32,7 +35,8 @@ class ContactsController < ApplicationController
     end
   end
 
-  def update
+  def destroy
+    set_contact
     @contact.destroy
     redirect_to contacts_url, notice: 'Contact was successfully destroyed.'
   end
