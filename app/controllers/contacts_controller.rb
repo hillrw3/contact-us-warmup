@@ -1,5 +1,4 @@
 class ContactsController < ApplicationController
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   def index
     @contacts = Contact.all
@@ -19,8 +18,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
 
     if @contact.save
-      redirect_to @contact, notice: 'Contact was successfully created.'
-      render :show, status: :created, location: @contact
+      redirect_to contacts_url, notice: 'Contact was successfully created.'
     else
       render :new
     end
@@ -49,9 +47,9 @@ class ContactsController < ApplicationController
     end
 
     def contact_params
-      params[:contact][:email].reverse!
-      params[:contact][:name].reverse!
-      params[:contact][:notes].reverse!
+      params[:contact][:email]
+      params[:contact][:name]
+      params[:contact][:notes]
       params.require(:contact).permit(:name, :email, :notes)
     end
 end
